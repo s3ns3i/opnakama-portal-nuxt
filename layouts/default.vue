@@ -13,11 +13,13 @@
       </template>
       <template v-slot:extension>
         <v-btn dark text>Aktualności</v-btn>
-        <v-btn dark text>Forum</v-btn>
+        <v-btn dark text href="http://forum.onepiecenakama.pl/" target="_blank"
+          >Forum</v-btn
+        >
         <v-btn text dark>Anime</v-btn>
         <v-btn text dark>Konkursy</v-btn>
         <v-spacer />
-        <v-btn icon dark>
+        <v-btn icon dark href="https://discord.gg/wmgXWVR" target="_blank">
           <v-icon>mdi-discord</v-icon>
         </v-btn>
       </template>
