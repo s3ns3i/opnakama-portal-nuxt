@@ -24,11 +24,11 @@
         </v-btn>
       </template>
     </v-app-bar>
-    <v-content id="content">
+    <v-main id="content">
       <v-container>
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
     <v-btn fixed right bottom fab color="primary">
       <v-icon>mdi-chat</v-icon>
     </v-btn>
@@ -39,5 +39,7 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'LayoutDefault',
+}
 </script>
