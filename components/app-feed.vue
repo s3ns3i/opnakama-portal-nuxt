@@ -1,35 +1,32 @@
 <template>
   <v-card class="fb-page-container">
-    <v-card-title>Aktualności</v-card-title>
     <div>
       <div id="fb-root"></div>
       <script
         async
         defer
         crossorigin="anonymous"
-        src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v7.0&appId=902476783583400&autoLogAppEvents=1"
+        :src="`https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v7.0&appId=${appId}&autoLogAppEvents=1`"
         nonce="q7ZrMnVq"
       ></script>
       <div
         id="fb-plugin"
         ref="fbPagePlugin"
         class="fb-page"
-        data-href="https://www.facebook.com/Wanted-Team-1219982108141916/"
+        :data-href="`https://www.facebook.com/${feedId}/`"
         data-tabs="timeline"
         data-width="500"
-        data-height="600"
+        data-height="700"
         data-small-header="true"
         data-adapt-container-width="true"
         data-hide-cover="true"
         data-show-facepile="false"
       >
         <blockquote
-          cite="https://www.facebook.com/Wanted-Team-1219982108141916/"
+          :cite="`https://www.facebook.com/${feedId}/`"
           class="fb-xfbml-parse-ignore"
         >
-          <a href="https://www.facebook.com/Wanted-Team-1219982108141916/"
-            >Wanted Team</a
-          >
+          <a :href="`https://www.facebook.com/${feedId}/`">Wanted Team</a>
         </blockquote>
       </div>
     </div>
@@ -42,10 +39,24 @@
 export default {
   name: 'AppContent',
   // components: [Post],
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    appId: {
+      type: String,
+      required: true,
+    },
+    feedId: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       fb: null,
-      appId: '992148657891651',
+      // appId: '992148657891651',
       pageId: 'Wanted-Team-1219982108141916',
       token:
         'EAAOGWpxRaUMBAPokxnHIe1v5tKIiOZCmLODh3GV3dWTjKicYwiUiFQiaJ0ZCnRhO2xwvMs8hBdQxZCXGcCBVyIiLWq8DVkmZBLGqn4DIktyZBhNSgDIC3XckYLcT2MEWZBl7fCQttAs5ynZCZCcaXgWl0WQPfI0gGJmkePgjjf6Dc4UDqEXrE36xDBmABjUwdjjL2JLItIylS26KKEm3vzIe',

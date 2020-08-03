@@ -37,7 +37,12 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/date-filter.js',
+    '~/plugins/vue-chat-scroll.js',
+    '~/plugins/vuetify-theme-cache.js',
+    '~/plugins/socket-io.js',
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -57,6 +62,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    // 'nuxt-socket-io',
   ],
   /*
    ** Axios module configuration
@@ -72,10 +78,19 @@ export default {
     theme: {
       dark: false,
       themes: {
+        light: {
+          primary: colors.blue.lighten2,
+          accent: colors.red.accent1,
+          secondary: colors.orange.lighten2,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3,
+        },
         dark: {
           primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          accent: colors.red.accent2,
+          secondary: colors.orange.darken1,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -84,6 +99,14 @@ export default {
       },
     },
   },
+  // io: {
+  //   sockets: [
+  //     {
+  //       name: 'main',
+  //       url: 'http://localhost:3001',
+  //     },
+  //   ],
+  // },
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
