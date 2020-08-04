@@ -2,7 +2,7 @@
   <div class="message">
     <div class="message__header text-subtitle-2">
       <div class="message__header__sender">{{ message.sender }}</div>
-      <div>{{ getTimestamp(message.date) }}</div>
+      <div>{{ getTimestamp(message.createdAt) }}</div>
     </div>
     <div class="message__content primary">{{ message.content }}</div>
   </div>
@@ -19,7 +19,6 @@ export default {
   },
   methods: {
     getTimestamp(date) {
-      console.log(this.message)
       return `${this.getHours(date)}:${this.getMinutes(date)}
        ${this.getDate(date)}.${this.getMonth(date)}.${date.getFullYear()}`
     },
@@ -47,7 +46,6 @@ export default {
 .message {
   display: flex;
   flex-direction: column;
-  margin: 0 16px;
   &__header {
     margin-top: 8px;
     display: flex;
@@ -56,6 +54,8 @@ export default {
     }
   }
   &__content {
+    width: max-content;
+    max-width: 100%;
     padding: 10px;
     border-radius: 4px;
   }

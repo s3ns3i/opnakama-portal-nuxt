@@ -1,43 +1,22 @@
 <template>
   <v-card class="app-chat">
-    <v-app-bar color="secondary" dense dark>
+    <v-app-bar class="shrink" color="secondary" dense dark>
       ShoutBox
       <v-spacer></v-spacer>
       <v-btn icon @click="onChatClose"><v-icon>mdi-close</v-icon></v-btn>
     </v-app-bar>
-    <div
-      v-chat-scroll="{ always: false, smooth: true }"
-      class="app-chat__messages"
-    >
-      <app-chat-message
-        v-for="message in messages"
-        :key="message.id"
-        :message="message"
-      />
-      <!-- <li v-for="message in messages" :key="message.id" class="message"> -->
-      <!-- {{ message.content }} -->
-      <!-- </li> -->
-    </div>
-    <div class="app-chat__send-box">
-      <v-text-field
-        v-model="messageContent"
-        solo
-        hide-details
-        placeholder="Napisz wiadomość"
-        background-color="accent"
-        style="border-radius: 0;"
-        @keyup.enter="onSend"
-      ></v-text-field>
-    </div>
+    <app-chat-form v-if="!username" class="grow" @submit="onSubmit" />
+    <app-chat-content v-if="username" :messages="messages" />
+    <app-chat-send-box v-if="username" ref="sendBox" @message="onSend" />
   </v-card>
 </template>
 
 <script>
-import AppChatMessage from '@/components/app-chat/app-chat-message.vue'
+import AppChatContent from '@/components/app-chat/app-chat-content.vue'
 
 export default {
   name: 'AppChat',
-  components: [AppChatMessage],
+  components: [AppChatContent],
   props: {
     isChat: {
       type: Boolean,
@@ -46,9 +25,9 @@ export default {
   },
   data() {
     return {
-      messageContent: '',
-      messages: [],
       unread: 0,
+      messages: [],
+      username: '',
     }
   },
   watch: {
@@ -59,15 +38,18 @@ export default {
       }
     },
   },
+  beforeMount() {
+    this.initChat()
+  },
   mounted() {
-    this.$socket.on('message_confirm', ({ sender, content, date }) => {
+    this.$socket.on('message_confirm', ({ id, sender, content, createdAt }) => {
       this.messages.push({
-        id: this.messages.length + 1,
+        id,
         sender,
         content,
-        date: new Date(date),
+        createdAt: new Date(createdAt),
       })
-      this.messageContent = ''
+      this.$refs.sendBox.clearContent()
       if (!this.isChat) {
         this.unread += 1
         this.$emit('unread', this.unread)
@@ -78,11 +60,32 @@ export default {
     onChatClose() {
       this.$emit('close')
     },
-    onSend() {
+    onSend(content) {
       this.$socket.emit('message', {
-        sender: 'anon',
-        content: this.messageContent,
+        sender: this.username,
+        content,
       })
+    },
+    initChat() {
+      const username = localStorage.getItem('opnakama_shoutbox_username')
+      if (username) {
+        this.username = username
+        this.fetchMessages()
+      }
+    },
+    onSubmit(username) {
+      localStorage.setItem('opnakama_shoutbox_username', username)
+      this.username = username
+      this.fetchMessages()
+    },
+    fetchMessages() {
+      this.$axios.get('http://localhost:3001/messages').then(
+        ({ data }) =>
+          (this.messages = data.map((message) => ({
+            ...message,
+            createdAt: new Date(message.createdAt),
+          })))
+      )
     },
   },
 }
@@ -91,6 +94,8 @@ export default {
 <style lang="scss" scoped>
 .app-chat {
   position: fixed;
+  display: flex;
+  flex-direction: column;
   bottom: 16px;
   right: 16px;
   width: 400px;
@@ -99,7 +104,13 @@ export default {
   overflow: hidden;
   &__messages {
     height: 505px;
+    width: 400px;
+    max-width: 400px;
+    padding: 0 16px;
     overflow-y: auto;
+    &__message-last {
+      margin-bottom: 20px;
+    }
   }
 }
 </style>
