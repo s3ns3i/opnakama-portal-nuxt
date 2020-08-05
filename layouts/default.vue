@@ -23,6 +23,8 @@
                 >Forum</v-btn
               >
               <v-btn text dark>Anime</v-btn>
+              <v-btn text dark>Artykuły (link do bloga)</v-btn>
+              <v-btn text dark>Konkursy (link do instagrama)</v-btn>
               <v-spacer />
               <v-btn
                 icon
