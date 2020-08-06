@@ -5,7 +5,7 @@
       <v-list-item
         v-for="chapter in chapters"
         :key="chapter.id"
-        :href="chapter.link"
+        :href="getChapterLink(chapter)"
         target="_blank"
         dense
         link
@@ -22,7 +22,12 @@
       </v-list-item>
       <v-list-item>
         <v-list-item-content>
-          <v-btn color="accent" href="" target="_blank" tile>
+          <v-btn
+            color="accent"
+            href="https://reader.onepiecenakama.pl"
+            target="_blank"
+            tile
+          >
             Przejdź do readera →
           </v-btn>
         </v-list-item-content>
@@ -66,10 +71,9 @@ export default {
           this.chapters = data
         })
     },
-    onChapter() {
-      // provide a link to the reader
+    getChapterLink(chapter) {
+      return `https://reader.onepiecenakama.pl/read/${chapter['fs_comic.stub']}/pl/${chapter.chapter}/${chapter.volume}/page/1`
     },
-    onReader() {},
   },
 }
 </script>
