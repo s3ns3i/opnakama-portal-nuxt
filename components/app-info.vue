@@ -8,7 +8,7 @@
         :href="chapter.link"
         target="_blank"
         dense
-        @click="onChapter"
+        link
       >
         <v-list-item-content>
           <v-row>

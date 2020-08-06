@@ -1,8 +1,23 @@
 <template>
-  <v-app>
+  <v-app :style="cssVars()">
     <v-container style="padding: 0;">
+      <app-navigation-drawer v-model="drawer" @themeChange="onThemeChange" />
       <v-row justify="center" no-gutters>
-        <v-col lg="12" xl="10">
+        <v-col class="hidden-md-and-up">
+          <v-app-bar
+            hide-on-scroll
+            prominent
+            src="logo3_big.png"
+            fade-img-on-scroll
+            color="primary"
+          >
+            <v-app-bar-nav-icon dark @click="drawer = !drawer" />
+            <template v-slot:img="{ props }">
+              <v-img v-bind="props" height="128" contain></v-img>
+            </template>
+          </v-app-bar>
+        </v-col>
+        <v-col lg="12" xl="10" class="hidden-sm-and-down">
           <v-app-bar
             hide-on-scroll
             prominent
@@ -22,9 +37,9 @@
                 target="_blank"
                 >Forum</v-btn
               >
-              <v-btn text dark>Anime</v-btn>
-              <v-btn text dark>Artykuły (link do bloga)</v-btn>
-              <v-btn text dark>Konkursy (link do instagrama)</v-btn>
+              <v-btn text dark disabled>Anime</v-btn>
+              <v-btn text dark disabled>Artykuły</v-btn>
+              <v-btn text dark disabled>Konkursy</v-btn>
               <v-spacer />
               <v-btn
                 icon
@@ -67,8 +82,11 @@
         <v-icon>mdi-chat</v-icon>
       </v-btn>
     </v-badge>
-    <v-footer app>
-      <span>&copy; Portal One Piece Nakama wykonany przez s3ns3i (2020)</span>
+    <v-footer :app="$vuetify.breakpoint.sm">
+      <span
+        >&copy; Portal One Piece Nakama wykonany przez s3ns3i (2020) Tło pobrane
+        ze strony www.freepik.com</span
+      >
     </v-footer>
     <app-chat
       v-show="isChat"
@@ -82,14 +100,16 @@
 
 <script>
 import AppChat from '@/components/app-chat/app-chat.vue'
+import AppNavigationDrawer from '@/components/app-navigation-drawer.vue'
 
 export default {
   name: 'LayoutDefault',
-  components: [AppChat],
+  components: [AppChat, AppNavigationDrawer],
   data() {
     return {
       isChat: false,
       unread: 0,
+      drawer: false,
     }
   },
   methods: {
@@ -110,6 +130,9 @@ export default {
     onClearUnread() {
       this.unread = 0
     },
+    cssVars() {
+      // return { backgroundImage: 'url(background.jpg)', backgroundSize: 'cover' }
+    },
   },
 }
 </script>
@@ -118,6 +141,6 @@ export default {
   position: fixed;
   bottom: 16px;
   right: 16px;
-  z-index: 900;
+  z-index: 6;
 }
 </style>

@@ -129,15 +129,13 @@ export default {
   height: 600px;
   z-index: 999;
   overflow: hidden;
-  &__messages {
-    height: 505px;
-    width: 400px;
-    max-width: 400px;
-    padding: 0 16px;
-    overflow-y: auto;
-    &__message-last {
-      margin-bottom: 20px;
-    }
+}
+@media only screen and (max-width: 600px) {
+  .app-chat {
+    height: 100vh;
+    width: 100vw;
+    bottom: 0;
+    right: 0;
   }
 }
 </style>

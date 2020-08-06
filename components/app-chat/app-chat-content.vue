@@ -37,4 +37,9 @@ export default {
     margin-bottom: 20px;
   }
 }
+@media only screen and (max-width: 600px) {
+  .messages {
+    height: auto;
+  }
+}
 </style>
