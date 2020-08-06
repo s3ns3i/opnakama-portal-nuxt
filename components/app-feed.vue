@@ -16,7 +16,7 @@
         :data-href="`https://www.facebook.com/${feedId}/`"
         data-tabs="timeline"
         data-width="500"
-        data-height="700"
+        data-height="650"
         data-small-header="true"
         data-adapt-container-width="true"
         data-hide-cover="true"

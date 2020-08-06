@@ -1,15 +1,20 @@
 <template>
   <v-row justify="center">
-    <v-col cols="12" sm="8" md="3" lg="3" xl="3">
-      <app-info />
+    <v-col cols="12" sm="8" md="5" lg="3" xl="2">
+      <v-row class="mb-6">
+        <app-info title="One Piece" stub="piraciop" />
+      </v-row>
+      <v-row>
+        <app-info title="Manga" />
+      </v-row>
     </v-col>
-    <v-col cols="12" sm="6" md="4" lg="4" xl="3"
+    <v-col cols="12" sm="6" md="7" lg="4" xl="3"
       ><app-feed
         title="Aktualności OP nakama"
         app-id="1067347306994131"
         feed-id="onepiecenakamapl"
     /></v-col>
-    <v-col cols="12" sm="6" md="4" lg="4" xl="3"
+    <v-col cols="12" sm="6" md="7" lg="4" xl="3" offset-md="5" offset-lg="0"
       ><app-feed
         title="Aktualności Wanted Team"
         app-id="1067347306994131"
