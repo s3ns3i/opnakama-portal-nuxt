@@ -3,14 +3,34 @@
     <v-app-bar class="shrink" color="secondary" dense dark>
       ShoutBox
       <v-spacer></v-spacer>
-      <v-btn icon @click="onToggleSound">
-        <v-icon>{{ sound ? 'mdi-volume-high' : 'mdi-volume-off' }}</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on" @click="onUsernameEdit">
+            <v-icon>mdi-account-edit</v-icon>
+          </v-btn>
+        </template>
+        <span>Zmień nazwę użytkownika</span>
+      </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on" @click="onToggleSound">
+            <v-icon>{{ sound ? 'mdi-volume-high' : 'mdi-volume-off' }}</v-icon>
+          </v-btn>
+        </template>
+        <span>{{
+          sound ? 'Wycisz powiadomienia' : 'Włącz powiadomienia'
+        }}</span>
+      </v-tooltip>
       <v-btn icon @click="onChatClose"><v-icon>mdi-close</v-icon></v-btn>
     </v-app-bar>
-    <app-chat-form v-if="!username" class="grow" @submit="onSubmit" />
-    <app-chat-content v-if="username" :messages="messages" />
-    <app-chat-send-box v-if="username" ref="sendBox" @message="onSend" />
+    <app-chat-form
+      v-if="setUsername"
+      class="grow"
+      :username="username"
+      @submit="onSubmit"
+    />
+    <app-chat-content v-if="!setUsername" :messages="messages" />
+    <app-chat-send-box v-if="!setUsername" ref="sendBox" @message="onSend" />
     <audio ref="audio">
       <source src="@/static/notification.mp3" type="audio/mpeg" />
     </audio>
@@ -36,6 +56,7 @@ export default {
       username: '',
       messagesLimit: 200,
       sound: false,
+      setUsername: true,
     }
   },
   watch: {
@@ -51,7 +72,7 @@ export default {
   },
   mounted() {
     this.$socket.on('message_confirm', ({ id, sender, content, createdAt }) => {
-      if (this.sound) {
+      if (this.sound && this.$refs.audio) {
         this.$refs.audio.play()
         this.$refs.audio.addEventListener('canplaythrough', () => {
           this.$refs.audio.play()
@@ -74,6 +95,9 @@ export default {
     })
   },
   methods: {
+    onUsernameEdit() {
+      this.setUsername = true
+    },
     onToggleSound() {
       this.sound = !this.sound
       localStorage.setItem('opnakama_shoutbox_sound', this.sound)
@@ -91,6 +115,7 @@ export default {
       const username = localStorage.getItem('opnakama_shoutbox_username')
       if (username) {
         this.username = username
+        this.setUsername = false
         this.fetchMessages()
       }
       const sound = localStorage.getItem('opnakama_shoutbox_sound')
@@ -103,6 +128,7 @@ export default {
     onSubmit(username) {
       localStorage.setItem('opnakama_shoutbox_username', username)
       this.username = username
+      this.setUsername = false
       this.fetchMessages()
     },
     fetchMessages() {

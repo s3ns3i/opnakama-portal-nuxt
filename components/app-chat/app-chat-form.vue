@@ -3,10 +3,14 @@
     <div class="form__text-field">
       <div class="form__text-field__container">
         <v-img src="logo3_big.png" max-height="128" contain></v-img>
-        <span>Aby korzystać z shoutboxa, musisz ustawić swój nick:</span>
+        <span>{{
+          username
+            ? 'Podaj nowy nick:'
+            : 'Aby korzystać z shoutboxa, musisz ustawić swój nick:'
+        }}</span>
         <div>
           <v-text-field
-            v-model="username"
+            v-model="newUsername"
             hide-details
             placeholder="Twój nick"
             @keyup.enter="onSend"
@@ -15,7 +19,7 @@
       </div>
     </div>
     <div class="form__btn">
-      <v-btn color="accent" :disabled="!username" @click="onSubmit"
+      <v-btn color="accent" :disabled="!newUsername" @click="onSubmit"
         >Zapisz</v-btn
       >
     </div>
@@ -25,14 +29,24 @@
 <script>
 export default {
   name: 'AppChatForm',
+  props: {
+    username: {
+      type: String,
+      required: false,
+      default: '',
+    },
+  },
   data() {
     return {
-      username: '',
+      newUsername: '',
     }
+  },
+  beforeMount() {
+    this.newUsername = this.username
   },
   methods: {
     onSubmit() {
-      this.$emit('submit', this.username)
+      this.$emit('submit', this.newUsername)
     },
   },
 }
