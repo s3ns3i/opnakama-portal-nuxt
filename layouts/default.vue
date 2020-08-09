@@ -40,7 +40,6 @@
               <v-btn text dark disabled>Anime</v-btn>
               <v-btn text dark disabled>Artykuły</v-btn>
               <v-btn text dark disabled>Konkursy</v-btn>
-              <v-spacer />
               <v-btn
                 icon
                 dark
@@ -83,10 +82,13 @@
       </v-btn>
     </v-badge>
     <v-footer :app="$vuetify.breakpoint.sm">
-      <span
-        >&copy; Portal One Piece Nakama wykonany przez s3ns3i (2020) Tło pobrane
-        ze strony www.freepik.com</span
-      >
+      <span>
+        &copy; Portal One Piece Nakama wykonany przez s3ns3i (2020)
+      </span>
+      <!-- <span>
+        &copy; Portal One Piece Nakama wykonany przez s3ns3i (2020) Tło pobrane
+        ze strony www.freepik.com
+        </span> -->
     </v-footer>
     <app-chat
       v-show="isChat"
