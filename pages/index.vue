@@ -1,12 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" sm="8" md="5" lg="3" xl="2">
-      <v-row class="mb-6">
-        <app-info title="One Piece" stub="piraciop" />
-      </v-row>
-      <v-row>
-        <app-info title="Manga" />
-      </v-row>
+      <app-info />
     </v-col>
     <v-col cols="12" sm="6" md="7" lg="4" xl="3"
       ><app-feed

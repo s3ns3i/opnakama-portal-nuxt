@@ -1,6 +1,17 @@
 <template>
   <v-card class="app-info">
-    <v-card-title class="primary">{{ title }}</v-card-title>
+    <v-card-title class="primary white--text">
+      <v-autocomplete
+        v-model="stub"
+        :items="comics"
+        color="white"
+        class="mt-0 pt-0"
+        dark
+        hide-selected
+        hide-details
+        @change="onComicsChange"
+      />
+    </v-card-title>
     <v-list>
       <v-list-item
         v-for="chapter in chapters"
@@ -47,32 +58,42 @@ export default {
       type: String,
       required: true,
     },
-    stub: {
-      type: String,
-      required: false,
-      default: '',
-    },
   },
   data() {
     return {
+      stub: 'piraciop',
+      comics: [],
       chapters: [],
     }
   },
   beforeMount() {
-    this.fetchChapters()
+    this.fetchComics()
+    this.fetchChapters(this.stub)
     setInterval(this.fetchChapters, 600000)
   },
   methods: {
-    fetchChapters() {
-      const stubQuery = this.stub ? `?stub=${this.stub}` : ''
+    fetchComics() {
+      this.$axios.get('http://localhost:3002/comics').then(({ data }) => {
+        this.comics = data.map((comic) => ({
+          id: comic.id,
+          text: comic.name,
+          value: comic.stub,
+        }))
+      })
+    },
+    fetchChapters(stub) {
+      const stubQuery = this.stub ? `&stub=${stub}` : ''
       this.$axios
-        .get(`http://localhost:3002/chapters${stubQuery}`)
+        .get(`http://localhost:3002/chapters?size=8${stubQuery}`)
         .then(({ data }) => {
           this.chapters = data
         })
     },
     getChapterLink(chapter) {
       return `https://reader.onepiecenakama.pl/read/${chapter['fs_comic.stub']}/pl/${chapter.chapter}/${chapter.volume}/page/1`
+    },
+    onComicsChange(stub) {
+      this.fetchChapters(stub)
     },
   },
 }
