@@ -1,17 +1,25 @@
 <template>
   <v-card class="app-info">
-    <v-card-title class="primary white--text">
-      <v-autocomplete
-        v-model="stub"
-        :items="comics"
-        color="white"
-        class="mt-0 pt-0"
-        dark
-        hide-selected
-        hide-details
-        @change="onComicsChange"
-      />
-    </v-card-title>
+    <v-skeleton-loader
+      :loading="loading"
+      transition="fade-transition"
+      type="card-heading"
+    >
+      <v-card-title class="primary white--text">
+        <span class="mb-2">Mangi</span>
+        <v-autocomplete
+          v-model="stub"
+          :items="comics"
+          color="white"
+          class="mt-0 pt-0"
+          prepend-icon="mdi-magnify"
+          dark
+          hide-selected
+          hide-details
+          @change="onComicsChange"
+        />
+      </v-card-title>
+    </v-skeleton-loader>
     <v-list>
       <v-list-item
         v-for="chapter in chapters"
@@ -26,7 +34,7 @@
             <v-col cols="3">{{ `#${chapter.chapter}` }}</v-col>
             <v-divider vertical></v-divider>
             <v-col class="chapter-name" cols="8">
-              {{ chapter.name }}
+              {{ chapter.name ? chapter.name : 'Brak tytułu' }}
             </v-col>
           </v-row>
         </v-list-item-content>
@@ -53,17 +61,12 @@
 <script>
 export default {
   name: 'AppInfo',
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       stub: 'piraciop',
       comics: [],
       chapters: [],
+      loading: true,
     }
   },
   beforeMount() {
@@ -79,6 +82,7 @@ export default {
           text: comic.name,
           value: comic.stub,
         }))
+        this.loading = false
       })
     },
     fetchChapters(stub) {

@@ -26,7 +26,11 @@
           :cite="`https://www.facebook.com/${feedId}/`"
           class="fb-xfbml-parse-ignore"
         >
-          <a :href="`https://www.facebook.com/${feedId}/`">Wanted Team</a>
+          <v-skeleton-loader
+            type="list-item-avatar-two-line, list-item-avatar-two-line, image, article, actions"
+            height="650"
+            loading
+          />
         </blockquote>
       </div>
     </div>
