@@ -42,7 +42,7 @@ import AppChatContent from '@/components/app-chat/app-chat-content.vue'
 
 export default {
   name: 'AppChat',
-  components: [AppChatContent],
+  components: { AppChatContent },
   props: {
     isChat: {
       type: Boolean,

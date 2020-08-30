@@ -38,11 +38,8 @@
 </template>
 
 <script>
-// import Post from '@/components/post.vue'
-
 export default {
   name: 'AppContent',
-  // components: [Post],
   props: {
     title: {
       type: String,
@@ -60,16 +57,11 @@ export default {
   data() {
     return {
       fb: null,
-      // appId: '992148657891651',
       pageId: 'Wanted-Team-1219982108141916',
       token:
         'EAAOGWpxRaUMBAPokxnHIe1v5tKIiOZCmLODh3GV3dWTjKicYwiUiFQiaJ0ZCnRhO2xwvMs8hBdQxZCXGcCBVyIiLWq8DVkmZBLGqn4DIktyZBhNSgDIC3XckYLcT2MEWZBl7fCQttAs5ynZCZCcaXgWl0WQPfI0gGJmkePgjjf6Dc4UDqEXrE36xDBmABjUwdjjL2JLItIylS26KKEm3vzIe',
       posts: [],
     }
-  },
-  created() {
-    // this.initFBSDK()
-    // this.getPosts()
   },
   mounted() {
     window.onresize = this.resizeFbPagePlugin

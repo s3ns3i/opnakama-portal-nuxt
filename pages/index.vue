@@ -24,6 +24,6 @@ import AppFeed from '@/components/app-feed.vue'
 
 export default {
   name: 'MainPage',
-  components: [AppInfo, AppFeed],
+  components: { AppInfo, AppFeed },
 }
 </script>

@@ -106,7 +106,7 @@ import AppNavigationDrawer from '@/components/app-navigation-drawer.vue'
 
 export default {
   name: 'LayoutDefault',
-  components: [AppChat, AppNavigationDrawer],
+  components: { AppChat, AppNavigationDrawer },
   data() {
     return {
       isChat: false,

@@ -16,7 +16,7 @@ import AppChatMessage from '@/components/app-chat/app-chat-message.vue'
 
 export default {
   name: 'AppChat',
-  components: [AppChatMessage],
+  components: { AppChatMessage },
   props: {
     messages: {
       type: Array,
