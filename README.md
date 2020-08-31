@@ -1,4 +1,4 @@
-# wt-portal
+# opnakama-portal
 
 ## Build Setup
 

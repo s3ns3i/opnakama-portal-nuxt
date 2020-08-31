@@ -72,7 +72,7 @@ export default {
       FB.XFBML.parse(this.$refs.fbPagePlugin.$el)
     },
     async getPosts() {
-      const page = await this.$axios.$get(
+      await this.$axios.$get(
         'https://www.facebook.com/Wanted-Team-1219982108141916/posts',
         {
           crossdomain: true,
@@ -85,7 +85,6 @@ export default {
           },
         }
       )
-      console.log(page)
     },
     fetchFeed() {
       this.fb.api(
@@ -103,7 +102,6 @@ export default {
       posts.forEach((post) => {
         const mappedMessage = post.message.split('\n').map((line) => ({ line }))
 
-        console.log(mappedMessage)
         const mappedPost = {
           created_time: post.created_time,
           id: post.id,
@@ -112,7 +110,6 @@ export default {
 
         this.posts.push(mappedPost)
       })
-      console.log(posts)
     },
     initFBSDK() {
       const _this = this

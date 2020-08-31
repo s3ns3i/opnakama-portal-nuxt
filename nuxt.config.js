@@ -16,8 +16,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    title: 'One Piece Nakama',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -33,6 +32,9 @@ export default {
    ** Global CSS
    */
   css: [],
+  router: {
+    base: '/portal/',
+  },
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -121,5 +123,13 @@ export default {
         },
       })
     },
+  },
+  env: {
+    SOCKET_HOST: 'localhost',
+    PORT: 3002,
+    BACK_END_HOST: 'localhost',
+    // SOCKET_HOST: '68.66.226.86', // production
+    // PORT: 30002, // production
+    // BACK_END_HOST: '68.66.226.86', // production
   },
 }

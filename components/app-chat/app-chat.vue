@@ -132,13 +132,15 @@ export default {
       this.fetchMessages()
     },
     fetchMessages() {
-      this.$axios.get('http://localhost:3001/messages').then(
-        ({ data }) =>
-          (this.messages = data.map((message) => ({
-            ...message,
-            createdAt: new Date(message.createdAt),
-          })))
-      )
+      this.$axios
+        .get(`http://${process.env.BACK_END_HOST}:${process.env.PORT}/messages`)
+        .then(
+          ({ data }) =>
+            (this.messages = data.map((message) => ({
+              ...message,
+              createdAt: new Date(message.createdAt),
+            })))
+        )
     },
   },
 }

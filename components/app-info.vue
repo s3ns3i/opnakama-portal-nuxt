@@ -76,19 +76,23 @@ export default {
   },
   methods: {
     fetchComics() {
-      this.$axios.get('http://localhost:3002/comics').then(({ data }) => {
-        this.comics = data.map((comic) => ({
-          id: comic.id,
-          text: comic.name,
-          value: comic.stub,
-        }))
-        this.loading = false
-      })
+      this.$axios
+        .get(`http://${process.env.BACK_END_HOST}:${process.env.PORT}/comics`)
+        .then(({ data }) => {
+          this.comics = data.map((comic) => ({
+            id: comic.id,
+            text: comic.name,
+            value: comic.stub,
+          }))
+          this.loading = false
+        })
     },
     fetchChapters(stub) {
       const stubQuery = this.stub ? `&stub=${stub}` : ''
       this.$axios
-        .get(`http://localhost:3002/chapters?size=8${stubQuery}`)
+        .get(
+          `http://${process.env.BACK_END_HOST}:${process.env.PORT}/chapters?size=8${stubQuery}`
+        )
         .then(({ data }) => {
           this.chapters = data
         })
