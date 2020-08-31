@@ -10,6 +10,7 @@
             src="logo3_big.png"
             fade-img-on-scroll
             color="primary"
+            style="opacity: 0.8;"
           >
             <v-app-bar-nav-icon dark @click="drawer = !drawer" />
             <template v-slot:img="{ props }">
@@ -24,6 +25,7 @@
             src="logo3_big.png"
             fade-img-on-scroll
             color="primary"
+            style="opacity: 0.8;"
           >
             <template v-slot:img="{ props }">
               <v-img v-bind="props" height="128" contain></v-img>
@@ -85,10 +87,10 @@
       <span>
         &copy; Portal One Piece Nakama wykonany przez s3ns3i (2020)
       </span>
-      <!-- <span>
+      <span>
         &copy; Portal One Piece Nakama wykonany przez s3ns3i (2020) Tło pobrane
         ze strony www.freepik.com
-        </span> -->
+      </span>
     </v-footer>
     <app-chat
       v-show="isChat"
@@ -133,7 +135,7 @@ export default {
       this.unread = 0
     },
     cssVars() {
-      // return { backgroundImage: 'url(background.jpg)', backgroundSize: 'cover' }
+      return { backgroundImage: 'url(background.jpg)', backgroundSize: 'cover' }
     },
   },
 }
