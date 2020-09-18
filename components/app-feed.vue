@@ -61,6 +61,7 @@ export default {
       token:
         'EAAOGWpxRaUMBAPokxnHIe1v5tKIiOZCmLODh3GV3dWTjKicYwiUiFQiaJ0ZCnRhO2xwvMs8hBdQxZCXGcCBVyIiLWq8DVkmZBLGqn4DIktyZBhNSgDIC3XckYLcT2MEWZBl7fCQttAs5ynZCZCcaXgWl0WQPfI0gGJmkePgjjf6Dc4UDqEXrE36xDBmABjUwdjjL2JLItIylS26KKEm3vzIe',
       posts: [],
+      isTimeoutActive: false,
     }
   },
   computed: {
@@ -73,73 +74,14 @@ export default {
   },
   methods: {
     resizeFbPagePlugin() {
-      // eslint-disable-next-line no-undef
-      FB.XFBML.parse(this.$refs.fbPagePlugin.$el)
-    },
-    async getPosts() {
-      await this.$axios.$get(
-        'https://www.facebook.com/Wanted-Team-1219982108141916/posts',
-        {
-          crossdomain: true,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers':
-              'Origin, X-Requested-With Content-Type, Accept',
-            'User-Agent':
-              'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0',
-          },
-        }
-      )
-    },
-    fetchFeed() {
-      this.fb.api(
-        '/1219982108141916/feed',
-        ({ data }) => {
-          this.mapData(data)
-        },
-        {
-          access_token: this.token,
-        }
-      )
-    },
-    mapData(posts) {
-      // parse it - get every line by detecting \n symbol and then detect every url or image
-      posts.forEach((post) => {
-        const mappedMessage = post.message.split('\n').map((line) => ({ line }))
-
-        const mappedPost = {
-          created_time: post.created_time,
-          id: post.id,
-          message: mappedMessage,
-        }
-
-        this.posts.push(mappedPost)
-      })
-    },
-    initFBSDK() {
-      const _this = this
-      // eslint-disable-next-line nuxt/no-globals-in-created
-      window.fbAsyncInit = function () {
-        // eslint-disable-next-line no-undef
-        FB.init({
-          appId: '992148657891651',
-          xfbml: false,
-          version: 'v7.0',
-        })
-        // eslint-disable-next-line no-undef
-        _this.fb = FB
-        _this.fetchFeed()
+      if (!this.isTimeoutActive) {
+        this.isTimeoutActive = true
+        setTimeout(() => {
+          // eslint-disable-next-line no-undef
+          FB.XFBML.parse(this.$refs.fbPagePlugin.$el)
+          this.isTimeoutActive = false
+        }, 500)
       }
-      ;(function (d, s, id) {
-        const fjs = d.getElementsByTagName(s)[0]
-        if (d.getElementById(id)) {
-          return
-        }
-        const js = d.createElement(s)
-        js.id = id
-        js.src = '//connect.facebook.net/en_US/sdk.js'
-        fjs.parentNode.insertBefore(js, fjs)
-      })(document, 'script', 'facebook-jssdk')
     },
   },
 }
