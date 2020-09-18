@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer :value="value" absolute temporary @input="onInput">
     <v-list>
-      <v-list-item link>Aktualności</v-list-item>
+      <v-list-item link nuxt to="/">Aktualności</v-list-item>
       <v-list-item href="http://forum.onepiecenakama.pl/" link target="_blank"
         >Forum</v-list-item
       >

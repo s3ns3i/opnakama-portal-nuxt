@@ -6,7 +6,18 @@
       type="card-heading"
     >
       <v-card-title class="primary white--text">
-        <span class="mb-2">Mangi</span>
+        <span class="mb-2">
+          Wanted Team
+          <v-btn
+            dark
+            icon
+            href="https://discord.com/channels/545278821897863188/548629653158625292"
+            target="_blank"
+            style="margin-right: 20px;"
+          >
+            <v-icon>mdi-discord</v-icon>
+          </v-btn>
+        </span>
         <v-autocomplete
           v-model="stub"
           :items="comics"
@@ -45,6 +56,7 @@
             color="accent"
             href="https://reader.onepiecenakama.pl"
             target="_blank"
+            class="mt-3"
             tile
           >
             Przejdź do readera →
@@ -98,7 +110,7 @@ export default {
         })
     },
     getChapterLink(chapter) {
-      return `https://reader.onepiecenakama.pl/read/${chapter['fs_comic.stub']}/pl/${chapter.chapter}/${chapter.volume}/page/1`
+      return `https://reader.onepiecenakama.pl/read/${chapter['fs_comic.stub']}/pl/${chapter.volume}/${chapter.chapter}/page/1`
     },
     onComicsChange(stub) {
       this.fetchChapters(stub)

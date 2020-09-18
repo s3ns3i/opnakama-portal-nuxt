@@ -1,15 +1,17 @@
 <template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
-  </v-app>
+  <v-container style="height: 100%;">
+    <v-row justify="center" align="end" style="height: 50%;">
+      <h1 v-if="error.statusCode === 404">
+        {{ pageNotFound }}
+      </h1>
+      <h1 v-else class="white--text">
+        {{ otherError }}
+      </h1>
+    </v-row>
+    <v-row justify="center" align="start" style="height: 50%;">
+      <a href="/">Odśwież</a>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -24,8 +26,8 @@ export default {
   },
   data() {
     return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred',
+      pageNotFound: '404 Nie znaleziono strony',
+      otherError: 'Wystąpił nieznany błąd',
     }
   },
   head() {

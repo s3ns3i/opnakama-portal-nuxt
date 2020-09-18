@@ -69,6 +69,7 @@ export default {
   },
   beforeMount() {
     this.initChat()
+    console.log(this.$vuetify)
   },
   mounted() {
     this.$socket.on('message_confirm', ({ id, sender, content, createdAt }) => {

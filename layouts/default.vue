@@ -7,10 +7,9 @@
           <v-app-bar
             hide-on-scroll
             prominent
-            src="logo3_big.png"
+            src="banner_wano.png"
             fade-img-on-scroll
-            color="primary"
-            style="opacity: 0.8;"
+            :style="appBarOpacity"
           >
             <v-app-bar-nav-icon dark @click="drawer = !drawer" />
             <template v-slot:img="{ props }">
@@ -18,62 +17,53 @@
             </template>
           </v-app-bar>
         </v-col>
-        <v-col lg="12" xl="10" class="hidden-sm-and-down">
+        <v-col lg="11" xl="8" class="hidden-sm-and-down">
           <v-app-bar
             hide-on-scroll
             prominent
-            src="logo3_big.png"
+            src="banner_wano.png"
             fade-img-on-scroll
-            color="primary"
-            style="opacity: 0.8;"
+            :style="appBarOpacity"
           >
             <template v-slot:img="{ props }">
-              <v-img v-bind="props" height="128" contain></v-img>
+              <v-img v-bind="props"></v-img>
             </template>
             <template v-slot:extension>
-              <v-btn dark text>Aktualności</v-btn>
-              <v-btn
-                dark
-                text
+              <app-button-nav>Aktualności</app-button-nav>
+              <app-button-nav
                 href="http://forum.onepiecenakama.pl/"
                 target="_blank"
-                >Forum</v-btn
+                >Forum</app-button-nav
               >
-              <v-btn text dark disabled>Anime</v-btn>
-              <v-btn text dark disabled>Artykuły</v-btn>
-              <v-btn text dark disabled>Konkursy</v-btn>
-              <v-btn
-                icon
-                dark
+              <app-button-nav v-if="false" disabled>
+                Anime
+              </app-button-nav>
+              <app-button-nav v-if="false" disabled>Artykuły</app-button-nav>
+              <app-button-nav v-if="false" disabled>Konkursy</app-button-nav>
+              <app-button-nav
                 href="https://discord.com/channels/152793335852040192/152793335852040192"
                 target="_blank"
-                style="margin-right: 20px;"
+                style="margin-right: 20px; opacity: 0.85;"
               >
-                <v-icon>mdi-discord</v-icon>
-              </v-btn>
+                <span>Discord OP nakama <v-icon>mdi-discord</v-icon></span>
+              </app-button-nav>
+              <v-spacer />
+              <app-button-nav fab @click="onThemeChange">
+                <v-icon>mdi-theme-light-dark</v-icon>
+              </app-button-nav>
             </template>
-            <v-btn
-              style="position: absolute; right: 24px; top: 12px;"
-              icon
-              dark
-              @click="onThemeChange"
-            >
-              <v-icon>mdi-theme-light-dark</v-icon>
-            </v-btn>
           </v-app-bar>
         </v-col>
       </v-row>
     </v-container>
     <v-main id="content">
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-main>
     <v-badge
       v-if="!isChat"
       :content="unread"
       :value="unread"
-      class="button-fixed"
+      class="button--fixed"
       top
       left
       overlap
@@ -83,15 +73,6 @@
         <v-icon>mdi-chat</v-icon>
       </v-btn>
     </v-badge>
-    <v-footer :app="$vuetify.breakpoint.sm">
-      <span>
-        &copy; Portal One Piece Nakama wykonany przez s3ns3i (2020)
-      </span>
-      <span>
-        &copy; Portal One Piece Nakama wykonany przez s3ns3i (2020) Tło pobrane
-        ze strony www.freepik.com
-      </span>
-    </v-footer>
     <app-chat
       v-show="isChat"
       :is-chat="isChat"
@@ -105,16 +86,22 @@
 <script>
 import AppChat from '@/components/app-chat/app-chat.vue'
 import AppNavigationDrawer from '@/components/app-navigation-drawer.vue'
+import AppButtonNav from '@/components/app-button-nav.vue'
 
 export default {
   name: 'LayoutDefault',
-  components: { AppChat, AppNavigationDrawer },
+  components: { AppChat, AppNavigationDrawer, AppButtonNav },
   data() {
     return {
       isChat: false,
       unread: 0,
       drawer: false,
     }
+  },
+  computed: {
+    appBarOpacity() {
+      return this.$vuetify.theme.isDark ? 'opacity: 0.8;' : ''
+    },
   },
   methods: {
     onChatClick() {
@@ -135,16 +122,26 @@ export default {
       this.unread = 0
     },
     cssVars() {
-      return { backgroundImage: 'url(background.jpg)', backgroundSize: 'cover' }
+      return {
+        backgroundImage: this.$vuetify.theme.dark
+          ? 'none'
+          : 'url(/background.jpg)',
+        backgroundSize: 'cover',
+      }
     },
   },
 }
 </script>
 <style lang="scss" scoped>
-.button-fixed {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 6;
+.button {
+  &--gradient {
+    background-color: red;
+  }
+  &--fixed {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 6;
+  }
 }
 </style>

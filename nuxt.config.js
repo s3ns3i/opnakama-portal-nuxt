@@ -32,9 +32,6 @@ export default {
    ** Global CSS
    */
   css: [],
-  router: {
-    base: '/portal/',
-  },
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -82,8 +79,9 @@ export default {
       themes: {
         light: {
           primary: colors.blue.base,
-          accent: colors.red.base,
-          secondary: colors.orange.base,
+          accent: colors.red.lighten2,
+          secondary: colors.orange.lighten2,
+          'chat-message': colors.blue.lighten5,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -93,6 +91,7 @@ export default {
           primary: colors.blue.darken2,
           accent: colors.red.accent2,
           secondary: colors.orange.darken1,
+          'chat-message': colors.blue.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,

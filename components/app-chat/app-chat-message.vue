@@ -4,7 +4,7 @@
       <div class="message__header__sender">{{ message.sender }}</div>
       <div>{{ getTimestamp(message.createdAt) }}</div>
     </div>
-    <div class="message__content primary">{{ message.content }}</div>
+    <div class="message__content chat-message">{{ message.content }}</div>
   </div>
 </template>
 

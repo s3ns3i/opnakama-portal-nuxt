@@ -2,9 +2,10 @@
   <v-text-field
     v-model="messageContent"
     solo
+    outlined
     hide-details
+    color="accent"
     placeholder="Napisz wiadomość"
-    background-color="accent"
     style="border-radius: 0;"
     @keyup.enter="onSend"
   ></v-text-field>
@@ -38,7 +39,7 @@ export default {
     > .v-input__control
     > .v-input__slot
     fieldset {
-    border: none;
+    // border: none;
   }
 }
 </style>

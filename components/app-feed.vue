@@ -1,5 +1,5 @@
 <template>
-  <v-card class="fb-page-container">
+  <v-card class="fb-page-container" elevation="24" :style="appFeedOpacity">
     <div>
       <div id="fb-root"></div>
       <script
@@ -62,6 +62,11 @@ export default {
         'EAAOGWpxRaUMBAPokxnHIe1v5tKIiOZCmLODh3GV3dWTjKicYwiUiFQiaJ0ZCnRhO2xwvMs8hBdQxZCXGcCBVyIiLWq8DVkmZBLGqn4DIktyZBhNSgDIC3XckYLcT2MEWZBl7fCQttAs5ynZCZCcaXgWl0WQPfI0gGJmkePgjjf6Dc4UDqEXrE36xDBmABjUwdjjL2JLItIylS26KKEm3vzIe',
       posts: [],
     }
+  },
+  computed: {
+    appFeedOpacity() {
+      return this.$vuetify.theme.isDark ? 'opacity: 0.7;' : ''
+    },
   },
   mounted() {
     window.onresize = this.resizeFbPagePlugin
@@ -141,7 +146,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .fb-page-container {
-  max-width: 500px;
+  max-width: 494px;
+  border: 3px solid #777;
 }
 
 .fb-page,
