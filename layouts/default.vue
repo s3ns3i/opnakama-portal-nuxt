@@ -69,7 +69,7 @@
       overlap
       color="primary"
     >
-      <v-btn fab color="accent" @click="onChatClick">
+      <v-btn fab x-large color="accent" @click="onChatClick">
         <v-icon>mdi-chat</v-icon>
       </v-btn>
     </v-badge>
@@ -142,6 +142,17 @@ export default {
     bottom: 16px;
     right: 16px;
     z-index: 6;
+  }
+}
+</style>
+<style lang="scss">
+.v-badge {
+  &__badge {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    padding: 6px;
   }
 }
 </style>
