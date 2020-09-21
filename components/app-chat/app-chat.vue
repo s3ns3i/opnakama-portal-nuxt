@@ -69,7 +69,6 @@ export default {
   },
   beforeMount() {
     this.initChat()
-    console.log(this.$vuetify)
   },
   mounted() {
     this.$socket.on('message_confirm', ({ id, sender, content, createdAt }) => {
@@ -158,6 +157,10 @@ export default {
   height: 600px;
   z-index: 999;
   overflow: hidden;
+  &--xl {
+    bottom: 64px;
+    right: 256px;
+  }
 }
 @media only screen and (max-width: 600px) {
   .app-chat {

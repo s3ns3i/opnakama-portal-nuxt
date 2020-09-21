@@ -1,7 +1,7 @@
 <template>
   <v-btn
     :dark="dark"
-    :style="style"
+    :style="cssStyle"
     :color="color"
     :href="href"
     :target="target"
@@ -24,11 +24,6 @@ export default {
       type: Boolean,
       required: false,
       default: true,
-    },
-    style: {
-      type: String,
-      required: false,
-      default: 'opacity: 0.85;',
     },
     color: {
       type: String,
@@ -64,6 +59,11 @@ export default {
       type: Boolean,
       required: false,
       default: true,
+    },
+    cssStyle: {
+      type: String,
+      required: false,
+      default: 'opacity: 0.85;',
     },
     cssClass: {
       type: [Array, String],

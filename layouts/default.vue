@@ -13,7 +13,7 @@
           >
             <v-app-bar-nav-icon dark @click="drawer = !drawer" />
             <template v-slot:img="{ props }">
-              <v-img v-bind="props" height="128" contain></v-img>
+              <v-img v-bind="props" height="128"></v-img>
             </template>
           </v-app-bar>
         </v-col>
@@ -22,6 +22,7 @@
             hide-on-scroll
             prominent
             src="banner_wano.png"
+            class="mx-3"
             fade-img-on-scroll
             :style="appBarOpacity"
           >
@@ -43,7 +44,7 @@
               <app-button-nav
                 href="https://discord.com/channels/152793335852040192/152793335852040192"
                 target="_blank"
-                style="margin-right: 20px; opacity: 0.85;"
+                css-style="margin-right: 20px; opacity: 0.85;"
               >
                 <span>Discord OP nakama <v-icon>mdi-discord</v-icon></span>
               </app-button-nav>
@@ -63,7 +64,7 @@
       v-if="!isChat"
       :content="unread"
       :value="unread"
-      class="button--fixed"
+      :class="cssClasses"
       top
       left
       overlap
@@ -102,6 +103,12 @@ export default {
     appBarOpacity() {
       return this.$vuetify.theme.isDark ? 'opacity: 0.8;' : ''
     },
+    cssClasses() {
+      return [
+        'button--fixed',
+        { 'button--fixed--xl': this.$vuetify.breakpoint.xl },
+      ]
+    },
   },
   methods: {
     onChatClick() {
@@ -126,7 +133,7 @@ export default {
         backgroundImage: this.$vuetify.theme.dark
           ? 'none'
           : 'url(/background.jpg)',
-        backgroundSize: 'cover',
+        backgroundSize: 'contain',
       }
     },
   },
@@ -142,6 +149,10 @@ export default {
     bottom: 16px;
     right: 16px;
     z-index: 6;
+    &--xl {
+      bottom: 64px;
+      right: 256px;
+    }
   }
 }
 </style>
