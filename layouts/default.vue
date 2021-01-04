@@ -32,7 +32,7 @@
             <template v-slot:extension>
               <app-button-nav>Aktualności</app-button-nav>
               <app-button-nav
-                href="http://forum.onepiecenakama.pl/"
+                href="https://forum.onepiecenakama.pl/"
                 target="_blank"
                 >Forum</app-button-nav
               >
@@ -133,7 +133,7 @@ export default {
         backgroundImage: this.$vuetify.theme.dark
           ? 'none'
           : 'url(/background.jpg)',
-        backgroundSize: 'contain',
+        backgroundSize: 'cover',
       }
     },
   },

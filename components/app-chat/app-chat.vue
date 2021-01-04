@@ -38,11 +38,13 @@
 </template>
 
 <script>
+import AppChatForm from '@/components/app-chat/app-chat-form.vue'
 import AppChatContent from '@/components/app-chat/app-chat-content.vue'
+import AppChatSendBox from '@/components/app-chat/app-chat-send-box.vue'
 
 export default {
   name: 'AppChat',
-  components: { AppChatContent },
+  components: { AppChatForm, AppChatContent, AppChatSendBox },
   props: {
     isChat: {
       type: Boolean,
@@ -133,7 +135,7 @@ export default {
     },
     fetchMessages() {
       this.$axios
-        .get(`http://${process.env.BACK_END_HOST}:${process.env.PORT}/messages`)
+        .get(`${process.env.BACK_END_HOST}:${process.env.PORT}/messages`)
         .then(
           ({ data }) =>
             (this.messages = data.map((message) => ({

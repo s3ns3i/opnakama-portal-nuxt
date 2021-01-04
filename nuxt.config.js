@@ -124,11 +124,15 @@ export default {
     },
   },
   env: {
-    SOCKET_HOST: 'localhost',
-    PORT: 3002,
-    BACK_END_HOST: 'localhost',
-    // SOCKET_HOST: '68.66.226.86', // production
-    // PORT: 30002, // production
-    // BACK_END_HOST: '68.66.226.86', // production
+    // SOCKET_HOST: 'http://localhost',
+    // PORT: 3002,
+    // BACK_END_HOST: 'http://localhost',
+    // SOCKET_SECURE: false,
+    SOCKET_HOST: 'https://onepiecenakama.pl', // production
+    PORT: 30002, // production
+    BACK_END_HOST: 'https://onepiecenakama.pl', // production
+    SOCKET_SECURE: true, // production
+    FACEBOOK_TOKEN: 'FACEBOOK_TOKEN',
+    FACEBOOK_PAGE_ID: 'FACEBOOK_PAGE_ID',
   },
 }

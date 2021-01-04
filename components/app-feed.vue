@@ -57,9 +57,8 @@ export default {
   data() {
     return {
       fb: null,
-      pageId: 'Wanted-Team-1219982108141916',
-      token:
-        'EAAOGWpxRaUMBAPokxnHIe1v5tKIiOZCmLODh3GV3dWTjKicYwiUiFQiaJ0ZCnRhO2xwvMs8hBdQxZCXGcCBVyIiLWq8DVkmZBLGqn4DIktyZBhNSgDIC3XckYLcT2MEWZBl7fCQttAs5ynZCZCcaXgWl0WQPfI0gGJmkePgjjf6Dc4UDqEXrE36xDBmABjUwdjjL2JLItIylS26KKEm3vzIe',
+      pageId: process.env.FACEBOOK_PAGE_ID,
+      token: process.env.FACEBOOK_TOKEN,
       posts: [],
       isTimeoutActive: false,
     }
@@ -68,6 +67,9 @@ export default {
     appFeedOpacity() {
       return this.$vuetify.theme.isDark ? 'opacity: 0.7;' : ''
     },
+  },
+  updated() {
+    this.resizeFbPagePlugin()
   },
   mounted() {
     window.onresize = this.resizeFbPagePlugin

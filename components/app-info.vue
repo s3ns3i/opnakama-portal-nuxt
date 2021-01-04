@@ -83,13 +83,13 @@ export default {
   },
   beforeMount() {
     this.fetchComics()
-    this.fetchChapters(this.stub)
+    this.fetchChapters()
     setInterval(this.fetchChapters, 600000)
   },
   methods: {
     fetchComics() {
       this.$axios
-        .get(`http://${process.env.BACK_END_HOST}:${process.env.PORT}/comics`)
+        .get(`${process.env.BACK_END_HOST}:${process.env.PORT}/comics`)
         .then(({ data }) => {
           this.comics = data.map((comic) => ({
             id: comic.id,
@@ -99,11 +99,11 @@ export default {
           this.loading = false
         })
     },
-    fetchChapters(stub) {
-      const stubQuery = this.stub ? `&stub=${stub}` : ''
+    fetchChapters() {
+      const stubQuery = this.stub ? `&stub=${this.stub}` : ''
       this.$axios
         .get(
-          `http://${process.env.BACK_END_HOST}:${process.env.PORT}/chapters?size=8${stubQuery}`
+          `${process.env.BACK_END_HOST}:${process.env.PORT}/chapters?size=8${stubQuery}`
         )
         .then(({ data }) => {
           this.chapters = data

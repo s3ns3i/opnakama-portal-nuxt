@@ -2,12 +2,9 @@
   <v-navigation-drawer :value="value" absolute temporary @input="onInput">
     <v-list>
       <v-list-item link nuxt to="/">Aktualności</v-list-item>
-      <v-list-item href="http://forum.onepiecenakama.pl/" link target="_blank"
+      <v-list-item href="https://forum.onepiecenakama.pl/" link target="_blank"
         >Forum</v-list-item
       >
-      <v-list-item>Anime</v-list-item>
-      <v-list-item>Artykuły</v-list-item>
-      <v-list-item>Konkursy</v-list-item>
       <v-list-item
         link
         href="https://discord.com/channels/152793335852040192/152793335852040192"
